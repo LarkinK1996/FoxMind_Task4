@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class Division {
     ArrayList<Integer> result = new ArrayList<>();
-    int ostatok;
+    int remainder;
 
     public void division(ArrayList<Integer> dividend, int divider) {
 
 
         if (dividend.get(0) >= divider) {
             if (dividend.size() > 1) {
-                ostatok = dividend.get(0) % divider;
+                remainder = dividend.get(0) % divider;
                 result.add(dividend.get(0) / divider);
-                rewriting(dividend, ostatok);
+                rewriting(dividend, remainder);
                 division(dividend, divider);
             }
 

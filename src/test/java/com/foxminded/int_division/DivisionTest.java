@@ -3,11 +3,10 @@ package com.foxminded.int_division;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DivisionTest {
-
+/*
     Division divisionClass = new Division();
 
     @Test
@@ -19,7 +18,7 @@ public class DivisionTest {
         expected.add(3);
         expected.add(6);
 
-      //  ArrayList actual = divisionClass.division(dividend, divider);
-    //    assertEquals(expected, actual);
-    }
+        ArrayList actual = divisionClass.division(dividend, divider);
+        assertEquals(expected, actual);
+    }*/
 }
