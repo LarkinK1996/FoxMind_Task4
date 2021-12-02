@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Application {
     public static void main(String[] args) {
-
         Division myProgram = new Division();
         ArrayList<Integer> input = new ArrayList<>();
         input.add(7);
@@ -15,7 +14,9 @@ public class Application {
         int divider = 4;
         myProgram.division(input, divider);
 
-        System.out.println(myProgram.result);
+        for(Step step : myProgram.steps){
+            System.out.println(step);
+        }
 
     }
 }

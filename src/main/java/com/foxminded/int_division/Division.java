@@ -3,16 +3,15 @@ package com.foxminded.int_division;
 import java.util.ArrayList;
 
 public class Division {
-    ArrayList<Integer> result = new ArrayList<>();
+
     int remainder;
+    ArrayList<Step> steps = new ArrayList<>();
 
     public void division(ArrayList<Integer> dividend, int divider) {
-
-
         if (dividend.get(0) >= divider) {
             if (dividend.size() > 1) {
                 remainder = dividend.get(0) % divider;
-                result.add(dividend.get(0) / divider);
+                steps.add(new Step(dividend.get(0), divider));
                 rewriting(dividend, remainder);
                 division(dividend, divider);
             }
