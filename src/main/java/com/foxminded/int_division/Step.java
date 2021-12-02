@@ -16,10 +16,10 @@ public class Step {
     @Override
     public String toString() {
         return "Step{" +
-                "dividend=" + dividend +
-                ", divider=" + divider +
-                ", result=" + result +
-                ", remainder=" + remainder +
-                '}';
+            "dividend=" + dividend +
+            ", divider=" + divider +
+            ", result=" + result +
+            ", remainder=" + remainder +
+            '}';
     }
 }

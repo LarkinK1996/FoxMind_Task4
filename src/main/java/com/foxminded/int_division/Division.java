@@ -7,7 +7,8 @@ public class Division {
     int remainder;
     ArrayList<Step> steps = new ArrayList<>();
 
-    public ArrayList<Step> fillTheListSteps(int[] dividend, int divider) {
+    public ArrayList<Step> fillTheListSteps(int dividends, int divider) {
+        int[] dividend = transformation(dividends);
         ArrayList<Step> steps = new ArrayList<>();
         Memorizer memorizer = new Memorizer();
 
@@ -17,11 +18,15 @@ public class Division {
                 Step step = new Step(memorizer.value, divider);
                 steps.add(step);
                 memorizer.setValue(step.remainder);
+
             }
         }
 
         return steps;
+    }
 
-
+    private int[] transformation(int convertible) {
+        int[] digits = Integer.toString(convertible).chars().map(c -> c - '0').toArray();
+        return digits;
     }
 }
