@@ -1,4 +1,6 @@
 # Default ignored files
+*.log
+target
 .idea
 /shelf/
 /.idea/workspace.xml
