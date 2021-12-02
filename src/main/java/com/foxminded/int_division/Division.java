@@ -13,12 +13,11 @@ public class Division {
         Memorizer memorizer = new Memorizer();
 
         for (int i = 0; i < dividend.length; i++) {
-            memorizer.add(dividend[i]);
-            if (memorizer.value >= (divider)) {
+            memorizer.setValue(dividend[i]);
+            if (memorizer.value >= divider) {
                 Step step = new Step(memorizer.value, divider);
                 steps.add(step);
-                memorizer.setValue(step.remainder);
-
+                memorizer.value = step.remainder;
             }
         }
 

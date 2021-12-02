@@ -5,13 +5,17 @@ public class Step {
     int divider;
     int result;
     int remainder;
+    int localDividend;
+
 
     public Step(int dividend, int divider) {
         this.dividend = dividend;
         this.divider = divider;
-        result = dividend / divider;
-        remainder = dividend % divider;
+        this.result = dividend / divider;
+        this.remainder = dividend % divider;
+        this.localDividend = dividend - remainder;
     }
+
 
     @Override
     public String toString() {
