@@ -15,6 +15,8 @@ public class IntegerDivisionCalculator {
             remainder = adhesion(remainder, arrayOfDividend[i]);
             if (remainder >= divisor) {
                 Step step = new Step(remainder, divisor);
+                step.remainder = remainder % divisor;
+                step.product = step.dividend - step.remainder;
                 steps.add(step);
                 remainder = step.remainder;
             }
@@ -34,5 +36,4 @@ public class IntegerDivisionCalculator {
         z = x * 10 + y;
         return z;
     }
-
 }
