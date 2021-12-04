@@ -1,4 +1,7 @@
-package com.foxminded.division;
+package com.foxminded.division.calculator;
+
+import com.foxminded.division.model.DivisionResult;
+import com.foxminded.division.model.Step;
 
 import java.util.ArrayList;
 

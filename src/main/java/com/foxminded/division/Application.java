@@ -1,6 +1,9 @@
 package com.foxminded.division;
 
+import com.foxminded.division.calculator.IntegerDivisionCalculator;
 import com.foxminded.division.formatter.IntegerDivisionFormatter;
+import com.foxminded.division.model.DivisionResult;
+import com.foxminded.division.model.Step;
 
 public class Application {
     public static void main(String[] args) {

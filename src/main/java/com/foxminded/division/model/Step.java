@@ -1,4 +1,4 @@
-package com.foxminded.division;
+package com.foxminded.division.model;
 
 public class Step {
     public int dividend;

@@ -1,6 +1,6 @@
 package com.foxminded.division.formatter;
 
-import com.foxminded.division.DivisionResult;
+import com.foxminded.division.model.DivisionResult;
 
 public class IntegerDivisionFormatter {
     private static final String SPACE = " ";
