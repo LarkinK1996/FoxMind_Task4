@@ -2,12 +2,9 @@ package com.foxminded.division.calculator;
 
 import com.foxminded.division.model.DivisionResult;
 import com.foxminded.division.model.Step;
-
 import java.util.ArrayList;
 
 public class IntegerDivisionCalculator {
-
-    int remainder;
 
     public DivisionResult calculateDivisionResult(int dividend, int divisor) {
         int[] arrayOfDividend = convertingNumberToArray(dividend);
@@ -26,7 +23,6 @@ public class IntegerDivisionCalculator {
         }
         int quotient = dividend / divisor;
         DivisionResult result = new DivisionResult(dividend, divisor, quotient, steps);
-
         return result;
     }
 
@@ -35,8 +31,7 @@ public class IntegerDivisionCalculator {
     }
 
     private int adhesion(int x, int y) {
-        int z;
-        z = x * 10 + y;
-        return z;
+        return x * 10 + y;
     }
 }
+

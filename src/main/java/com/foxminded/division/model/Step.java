@@ -9,7 +9,6 @@ public class Step {
     public Step(int dividend, int divisor) {
         this.dividend = dividend;
         this.divisor = divisor;
-
     }
 
     @Override

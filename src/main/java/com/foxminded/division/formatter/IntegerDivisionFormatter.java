@@ -14,32 +14,41 @@ public class IntegerDivisionFormatter {
         return heading;
     }
 
+    private String createHeading(DivisionResult divisionResult) {
+        StringBuilder line1 = new StringBuilder();
+        StringBuilder line2 = new StringBuilder();
+        StringBuilder line3 = new StringBuilder();
+        String answer;
+
+        line1.append(MINUS)
+            .append(divisionResult.dividend)
+            .append(VERTICALLINE)
+            .append(divisionResult.steps.get(0).divisor)
+            .append(NEWLINE);
+
+        line2.append(SPACE)
+            .append(divisionResult.steps.get(0).product)
+            .append(new String(new char[deltaDigits(divisionResult.dividend, divisionResult.steps.get(0).product)]).replace("\0", SPACE))
+            .append(VERTICALLINE)
+            .append(new String(new char[getCountsOfDigits(divisionResult.result)]).replace("\0", DASH))
+            .append(NEWLINE);
+
+        line3.append(SPACE)
+            .append(new String(new char[getCountsOfDigits(divisionResult.steps.get(0).product)]).replace("\0", DASH))
+            .append(new String(new char[deltaDigits(divisionResult.dividend, divisionResult.steps.get(0).product)]).replace("\0", SPACE))
+            .append(VERTICALLINE)
+            .append(divisionResult.result);
+
+        answer = line1.toString() + line2.toString() + line3.toString();
+        return answer;
+    }
+
     private int getCountsOfDigits(int number) {
         return String.valueOf(Math.abs(number)).length();
     }
 
-    private String createHeading(DivisionResult divisionResult) {
-        StringBuilder underlineString = new StringBuilder();
-        StringBuilder spaces = new StringBuilder();
-        StringBuilder dashs = new StringBuilder();
-        int numberCharactersDividend = getCountsOfDigits(divisionResult.dividend);
-        int numberCharacterDivisor = getCountsOfDigits(divisionResult.divisor);
-
-
-        for (int i = 0; i < numberCharactersDividend; i++) {
-            underlineString.append(DASH);
-        }
-
-        for (int i = 0; i < numberCharactersDividend - numberCharacterDivisor; i++) {
-            spaces.append(SPACE);
-        }
-       // for (int i=0;i< ){
-
-            //}
-        String heading = MINUS + divisionResult.dividend + VERTICALLINE + divisionResult.steps.get(0).divisor + NEWLINE +
-            SPACE + divisionResult.steps.get(0).product + spaces + VERTICALLINE + underlineString + NEWLINE +
-            SPACE + DASH + spaces + VERTICALLINE + divisionResult.result;
-
-        return heading;
+    private int deltaDigits(int x, int y) {
+        return getCountsOfDigits(x) - getCountsOfDigits(y);
     }
 }
+
