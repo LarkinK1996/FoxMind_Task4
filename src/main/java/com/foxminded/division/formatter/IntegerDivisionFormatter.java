@@ -2,6 +2,7 @@ package com.foxminded.division.formatter;
 
 import com.foxminded.division.model.DivisionResult;
 import com.foxminded.division.model.DivisionStep;
+
 import java.util.ArrayList;
 
 public class IntegerDivisionFormatter {
@@ -19,13 +20,13 @@ public class IntegerDivisionFormatter {
         String line1 = (MINUS + divisionResult.getDividend() + VERTICALLINE
             + divisionResult.getSteps().get(0).divisor + NEWLINE);
         String line2 = (SPACE + divisionResult.getSteps().get(0).product +
-            new String(new char[deltaDigits(divisionResult.getDividend(), divisionResult.getSteps().get(0).product)]).replace("\0", SPACE)
+            new String(new char[calculateNumberLength(divisionResult.getDividend()) - calculateNumberLength(divisionResult.getSteps().get(0).product)]).replace("\0", SPACE)
             + VERTICALLINE
             + new String(new char[calculateNumberLength(divisionResult.getQuotient())]).replace("\0", DASH)
             + NEWLINE);
         String line3 = (SPACE +
             new String(new char[calculateNumberLength(divisionResult.getSteps().get(0).product)]).replace("\0", DASH)
-            + new String(new char[deltaDigits(divisionResult.getDividend(), divisionResult.getSteps().get(0).product)]).replace("\0", SPACE)
+            + new String(new char[calculateNumberLength(divisionResult.getDividend()) - calculateNumberLength(divisionResult.getSteps().get(0).product)]).replace("\0", SPACE)
             + VERTICALLINE + divisionResult.getQuotient());
 
         return line1 + line2 + line3;
@@ -52,7 +53,7 @@ public class IntegerDivisionFormatter {
         }
         result.append(NEWLINE);
         result.append((new String(new char[indent]).replace("\0", SPACE)));
-        result.append(divisionResult.getDividend()%divisionResult.getDivisor());
+        result.append(divisionResult.getDividend() % divisionResult.getDivisor());
 
         return result.toString();
     }
@@ -61,10 +62,5 @@ public class IntegerDivisionFormatter {
         return String.valueOf(Math.abs(number)).length();
     }
 
-    private int deltaDigits(int x, int y) {
-        return calculateNumberLength(x) - calculateNumberLength(y);
-    }
-
 }
-
 
