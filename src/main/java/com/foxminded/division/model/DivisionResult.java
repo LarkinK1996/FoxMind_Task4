@@ -32,3 +32,4 @@ public class DivisionResult {
         this.divisionSteps = divisionSteps;
     }
 }
+

@@ -2,7 +2,6 @@ package com.foxminded.division.calculator;
 
 import com.foxminded.division.model.DivisionResult;
 import com.foxminded.division.model.DivisionStep;
-
 import java.util.ArrayList;
 
 public class IntegerDivisionCalculator {
