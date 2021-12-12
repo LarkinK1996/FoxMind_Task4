@@ -2,6 +2,7 @@ package com.foxminded.division.formatter;
 
 import com.foxminded.division.model.DivisionResult;
 import com.foxminded.division.model.DivisionStep;
+
 import java.util.ArrayList;
 
 public class IntegerDivisionFormatter {
@@ -60,6 +61,5 @@ public class IntegerDivisionFormatter {
     private int calculateNumberLength(int number) {
         return String.valueOf(Math.abs(number)).length();
     }
-
 }
 
