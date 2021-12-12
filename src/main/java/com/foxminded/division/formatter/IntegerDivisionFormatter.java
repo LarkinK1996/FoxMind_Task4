@@ -1,6 +1,9 @@
 package com.foxminded.division.formatter;
 
 import com.foxminded.division.model.DivisionResult;
+import com.foxminded.division.model.DivisionStep;
+
+import java.util.ArrayList;
 
 public class IntegerDivisionFormatter {
     private static final String SPACE = " ";
@@ -10,45 +13,59 @@ public class IntegerDivisionFormatter {
     private static final String VERTICALLINE = "|";
 
     public String formatDivisionResult(DivisionResult divisionResult) {
-        String heading = createHeading(divisionResult);
-        return heading;
+        return createDivisionHeader(divisionResult) + createBody(divisionResult);
     }
 
-    private String createHeading(DivisionResult divisionResult) {
-        StringBuilder line1 = new StringBuilder();
-        StringBuilder line2 = new StringBuilder();
-        StringBuilder line3 = new StringBuilder();
-        String answer;
+    private String createDivisionHeader(DivisionResult divisionResult) {
+        String line1 = (MINUS + divisionResult.getDividend() + VERTICALLINE
+            + divisionResult.getSteps().get(0).divisor + NEWLINE);
+        String line2 = (SPACE + divisionResult.getSteps().get(0).product +
+            new String(new char[deltaDigits(divisionResult.getDividend(), divisionResult.getSteps().get(0).product)]).replace("\0", SPACE)
+            + VERTICALLINE
+            + new String(new char[calculateNumberLength(divisionResult.getQuotient())]).replace("\0", DASH)
+            + NEWLINE);
+        String line3 = (SPACE +
+            new String(new char[calculateNumberLength(divisionResult.getSteps().get(0).product)]).replace("\0", DASH)
+            + new String(new char[deltaDigits(divisionResult.getDividend(), divisionResult.getSteps().get(0).product)]).replace("\0", SPACE)
+            + VERTICALLINE + divisionResult.getQuotient());
 
-        line1.append(MINUS)
-            .append(divisionResult.dividend)
-            .append(VERTICALLINE)
-            .append(divisionResult.steps.get(0).divisor)
-            .append(NEWLINE);
-
-        line2.append(SPACE)
-            .append(divisionResult.steps.get(0).product)
-            .append(new String(new char[deltaDigits(divisionResult.dividend, divisionResult.steps.get(0).product)]).replace("\0", SPACE))
-            .append(VERTICALLINE)
-            .append(new String(new char[getCountsOfDigits(divisionResult.result)]).replace("\0", DASH))
-            .append(NEWLINE);
-
-        line3.append(SPACE)
-            .append(new String(new char[getCountsOfDigits(divisionResult.steps.get(0).product)]).replace("\0", DASH))
-            .append(new String(new char[deltaDigits(divisionResult.dividend, divisionResult.steps.get(0).product)]).replace("\0", SPACE))
-            .append(VERTICALLINE)
-            .append(divisionResult.result);
-
-        answer = line1.toString() + line2.toString() + line3.toString();
-        return answer;
+        return line1 + line2 + line3;
     }
 
-    private int getCountsOfDigits(int number) {
+    public String createBody(DivisionResult divisionResult) {
+
+        StringBuilder result = new StringBuilder();
+        ArrayList<DivisionStep> divisionSteps = divisionResult.getSteps();
+        int indent = 1;
+        for (int i = 1; i < divisionResult.getSteps().size(); i++, indent++) {
+            result.append(NEWLINE);
+            result.append((new String(new char[indent - 1]).replace("\0", SPACE)));
+            result.append(MINUS);
+            result.append(divisionSteps.get(i).dividend);
+
+            result.append(NEWLINE);
+            result.append((new String(new char[indent]).replace("\0", SPACE)));
+            result.append(divisionSteps.get(i).product);
+
+            result.append(NEWLINE);
+            result.append((new String(new char[indent]).replace("\0", SPACE)));
+            result.append((new String(new char[calculateNumberLength(divisionSteps.get(i).dividend)]).replace("\0", DASH)));
+        }
+        result.append(NEWLINE);
+        result.append((new String(new char[indent]).replace("\0", SPACE)));
+        result.append(divisionResult.getDividend()%divisionResult.getDivisor());
+
+        return result.toString();
+    }
+
+    private int calculateNumberLength(int number) {
         return String.valueOf(Math.abs(number)).length();
     }
 
     private int deltaDigits(int x, int y) {
-        return getCountsOfDigits(x) - getCountsOfDigits(y);
+        return calculateNumberLength(x) - calculateNumberLength(y);
     }
+
 }
+
 

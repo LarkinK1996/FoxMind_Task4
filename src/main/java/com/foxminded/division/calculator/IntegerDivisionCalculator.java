@@ -1,37 +1,42 @@
 package com.foxminded.division.calculator;
 
 import com.foxminded.division.model.DivisionResult;
-import com.foxminded.division.model.Step;
+import com.foxminded.division.model.DivisionStep;
+
 import java.util.ArrayList;
 
 public class IntegerDivisionCalculator {
 
     public DivisionResult calculateDivisionResult(int dividend, int divisor) {
-        int[] arrayOfDividend = convertingNumberToArray(dividend);
-        ArrayList<Step> steps = new ArrayList<>();
+        int[] dividendDigits = convertNumberToDigits(dividend);
+        ArrayList<DivisionStep> divisionSteps = new ArrayList<>();
         int remainder = 0;
 
-        for (int i = 0; i < arrayOfDividend.length; i++) {
-            remainder = adhesion(remainder, arrayOfDividend[i]);
+        for (int i = 0; i < dividendDigits.length; i++) {
+            remainder = stickingTwoNumbers(remainder, dividendDigits[i]);
             if (remainder >= divisor) {
-                Step step = new Step(remainder, divisor);
-                step.remainder = remainder % divisor;
-                step.product = step.dividend - step.remainder;
-                steps.add(step);
-                remainder = step.remainder;
+                divisionSteps.add(buildingStep(remainder, divisor));
+                remainder = remainder % divisor;
             }
         }
         int quotient = dividend / divisor;
-        DivisionResult result = new DivisionResult(dividend, divisor, quotient, steps);
-        return result;
+        return new DivisionResult(dividend, divisor, quotient, divisionSteps);
     }
 
-    private int[] convertingNumberToArray(int convertible) {
+    private int[] convertNumberToDigits(int convertible) {
         return Integer.toString(convertible).chars().map(c -> c - '0').toArray();
     }
 
-    private int adhesion(int x, int y) {
+    private int stickingTwoNumbers(int x, int y) {
         return x * 10 + y;
     }
+
+    private DivisionStep buildingStep(int remainder, int divisor) {
+        DivisionStep step = new DivisionStep(remainder, divisor);
+        step.remainder = remainder % divisor;
+        step.product = step.dividend - step.remainder;
+        return step;
+    }
+
 }
 

@@ -6,8 +6,8 @@ import com.foxminded.division.model.DivisionResult;
 
 public class Application {
     public static void main(String[] args) {
-        int divisor = 78945;
-        int divider = 2;
+        int divisor = 123456;
+        int divider = 100;
         IntegerDivisionCalculator calculator = new IntegerDivisionCalculator();
         IntegerDivisionFormatter formatter = new IntegerDivisionFormatter();
         DivisionResult result = calculator.calculateDivisionResult(divisor, divider);

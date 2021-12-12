@@ -1,12 +1,12 @@
 package com.foxminded.division.model;
 
-public class Step {
+public class DivisionStep {
     public int dividend;
     public int divisor;
     public int remainder;
     public int product;
 
-    public Step(int dividend, int divisor) {
+    public DivisionStep(int dividend, int divisor) {
         this.dividend = dividend;
         this.divisor = divisor;
     }
