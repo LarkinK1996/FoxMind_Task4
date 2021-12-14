@@ -3,8 +3,6 @@ package com.foxminded.division.formatter;
 import com.foxminded.division.model.DivisionResult;
 import com.foxminded.division.model.DivisionStep;
 
-import java.util.ArrayList;
-
 public class IntegerDivisionFormatter {
     private static final String SPACE = " ";
     private static final String MINUS = "_";
@@ -19,6 +17,14 @@ public class IntegerDivisionFormatter {
     private String createDivisionHeader(DivisionResult divisionResult) {
         int spaceAmount = calculateNumberLength(divisionResult.getDividend()) - calculateNumberLength(divisionResult.getSteps().get(0).getDivisorMultiple());
         int dashAmount = calculateNumberLength(divisionResult.getSteps().get(0).getDivisorMultiple());
+        int dashAmountInAnswer;
+        if (divisionResult.getQuotient() > divisionResult.getDivisor()) {
+            dashAmountInAnswer = calculateNumberLength(divisionResult.getQuotient());
+        } else
+            dashAmountInAnswer = calculateNumberLength(divisionResult.getDivisor());
+        if (divisionResult.getQuotient() < 0) {
+            dashAmountInAnswer++;
+        }
 
         String line1 = (MINUS + divisionResult.getDividend()
             + VERTICALLINE
@@ -27,7 +33,7 @@ public class IntegerDivisionFormatter {
         String line2 = (SPACE + divisionResult.getSteps().get(0).getDivisorMultiple() +
             SPACE.repeat(spaceAmount)
             + VERTICALLINE
-            + DASH.repeat(calculateNumberLength(divisionResult.getQuotient()))
+            + DASH.repeat(dashAmountInAnswer)
             + NEWLINE);
         String line3 = (SPACE +
             DASH.repeat(dashAmount)
@@ -37,9 +43,9 @@ public class IntegerDivisionFormatter {
         return line1 + line2 + line3;
     }
 
-    public String createDivisionBody(DivisionResult divisionResult) {
+    private String createDivisionBody(DivisionResult divisionResult) {
         StringBuilder result = new StringBuilder();
-        int indent = 1;
+        int indent = 2;
 
         for (int i = 1; i < divisionResult.getSteps().size(); i++, indent++) {
             result.append(formatStep(divisionResult.getSteps().get(i), indent));
