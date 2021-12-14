@@ -2,6 +2,7 @@ package com.foxminded.division.calculator;
 
 import com.foxminded.division.model.DivisionResult;
 import com.foxminded.division.model.DivisionStep;
+
 import java.util.ArrayList;
 
 public class IntegerDivisionCalculator {
@@ -19,7 +20,8 @@ public class IntegerDivisionCalculator {
             }
         }
         int quotient = dividend / divisor;
-        return new DivisionResult(dividend, divisor, quotient, divisionSteps);
+        remainder = dividend % divisor;
+        return new DivisionResult(dividend, divisor, quotient, divisionSteps, remainder);
     }
 
     private int[] convertNumberToDigits(int convertible) {
@@ -33,7 +35,7 @@ public class IntegerDivisionCalculator {
     private DivisionStep buildingStep(int remainder, int divisor) {
         DivisionStep step = new DivisionStep(remainder);
         step.setRemainder(remainder % divisor);
-        step.setDivisorMultiple(step.getDividend()-step.getRemainder());
+        step.setDivisorMultiple(step.getDividend() - step.getRemainder());
         return step;
     }
 

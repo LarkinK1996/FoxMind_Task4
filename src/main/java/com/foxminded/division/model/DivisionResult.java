@@ -6,13 +6,15 @@ public class DivisionResult {
     private final int dividend;
     private final int divisor;
     private final int quotient;
+    private final int remainder;
     private final ArrayList<DivisionStep> divisionSteps;
 
-    public DivisionResult(int dividend, int divisor, int quotient, ArrayList<DivisionStep> divisionSteps) {
+    public DivisionResult(int dividend, int divisor, int quotient, ArrayList<DivisionStep> divisionSteps,int remainder) {
         this.dividend = dividend;
         this.divisor = divisor;
         this.quotient = quotient;
         this.divisionSteps = divisionSteps;
+        this.remainder = remainder;
     }
 
     public int getDividend() {
@@ -27,8 +29,13 @@ public class DivisionResult {
         return quotient;
     }
 
+    public int getRemainder() {
+        return remainder;
+    }
+
     public ArrayList<DivisionStep> getSteps() {
         return divisionSteps;
     }
+
 }
 

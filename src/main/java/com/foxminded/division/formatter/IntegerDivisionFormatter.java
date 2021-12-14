@@ -17,44 +17,36 @@ public class IntegerDivisionFormatter {
     }
 
     private String createDivisionHeader(DivisionResult divisionResult) {
-        String line1 = (MINUS + divisionResult.getDividend() + VERTICALLINE
-            + divisionResult.getDivisor() + NEWLINE);
-        String line2 = (SPACE + divisionResult.getSteps().get(0).getDivisorMultiple() +
-            new String(new char[calculateNumberLength(divisionResult.getDividend()) - calculateNumberLength(divisionResult.getSteps().get(0).getDivisorMultiple())]).replace("\0", SPACE)
+        int spaceAmount = calculateNumberLength(divisionResult.getDividend()) - calculateNumberLength(divisionResult.getSteps().get(0).getDivisorMultiple());
+        int dashAmount = calculateNumberLength(divisionResult.getSteps().get(0).getDivisorMultiple());
+
+        String line1 = (MINUS + divisionResult.getDividend()
             + VERTICALLINE
-            + new String(new char[calculateNumberLength(divisionResult.getQuotient())]).replace("\0", DASH)
+            + divisionResult.getDivisor() + NEWLINE);
+
+        String line2 = (SPACE + divisionResult.getSteps().get(0).getDivisorMultiple() +
+            SPACE.repeat(spaceAmount)
+            + VERTICALLINE
+            + DASH.repeat(calculateNumberLength(divisionResult.getQuotient()))
             + NEWLINE);
         String line3 = (SPACE +
-            new String(new char[calculateNumberLength(divisionResult.getSteps().get(0).getDivisorMultiple())]).replace("\0", DASH)
-            + new String(new char[calculateNumberLength(divisionResult.getDividend()) - calculateNumberLength(divisionResult.getSteps().get(0).getDivisorMultiple())]).replace("\0", SPACE)
+            DASH.repeat(dashAmount)
+            + SPACE.repeat(spaceAmount)
             + VERTICALLINE + divisionResult.getQuotient());
 
         return line1 + line2 + line3;
     }
 
     public String createDivisionBody(DivisionResult divisionResult) {
-
         StringBuilder result = new StringBuilder();
-        ArrayList<DivisionStep> divisionSteps = divisionResult.getSteps();
         int indent = 1;
 
         for (int i = 1; i < divisionResult.getSteps().size(); i++, indent++) {
-            result.append(NEWLINE);
-            result.append((new String(new char[indent - 1]).replace("\0", SPACE)));
-            result.append(MINUS);
-            result.append(divisionSteps.get(i).getDividend());
-
-            result.append(NEWLINE);
-            result.append((new String(new char[indent]).replace("\0", SPACE)));
-            result.append(divisionSteps.get(i).getDivisorMultiple());
-
-            result.append(NEWLINE);
-            result.append((new String(new char[indent]).replace("\0", SPACE)));
-            result.append((new String(new char[calculateNumberLength(divisionSteps.get(i).getDividend())]).replace("\0", DASH)));
+            result.append(formatStep(divisionResult.getSteps().get(i), indent));
         }
         result.append(NEWLINE);
-        result.append((new String(new char[indent]).replace("\0", SPACE)));
-        result.append(divisionResult.getDividend() % divisionResult.getDivisor());
+        result.append(SPACE.repeat(indent));
+        result.append(divisionResult.getRemainder());
 
         return result.toString();
     }
@@ -63,8 +55,24 @@ public class IntegerDivisionFormatter {
         return String.valueOf(Math.abs(number)).length();
     }
 
-//    private String formatStep(DivisionStep step, int indent) {
+    private String formatStep(DivisionStep step, int indent) {
+        StringBuilder result = new StringBuilder();
+        int dividendLength = calculateNumberLength(step.getDividend());
 
-    //}
+        result.append(NEWLINE);
+        result.append(SPACE.repeat(indent - 1));
+        result.append(MINUS);
+        result.append(step.getDividend());
+
+        result.append(NEWLINE);
+        result.append(SPACE.repeat(indent));
+        result.append(step.getDivisorMultiple());
+
+        result.append(NEWLINE);
+        result.append(SPACE.repeat(indent));
+        result.append(DASH.repeat(dividendLength));
+
+        return result.toString();
+    }
 }
 
