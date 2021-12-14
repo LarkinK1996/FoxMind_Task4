@@ -11,8 +11,8 @@ public class IntegerDivisionCalculator {
         ArrayList<DivisionStep> divisionSteps = new ArrayList<>();
         int remainder = 0;
 
-        for (int i = 0; i < dividendDigits.length; i++) {
-            remainder = stickingTwoNumbers(remainder, dividendDigits[i]);
+        for (int localDividend : dividendDigits) {
+            remainder = combineNumbers(remainder, localDividend);
             if (remainder >= divisor) {
                 divisionSteps.add(buildingStep(remainder, divisor));
                 remainder = remainder % divisor;
@@ -26,14 +26,14 @@ public class IntegerDivisionCalculator {
         return Integer.toString(convertible).chars().map(c -> c - '0').toArray();
     }
 
-    private int stickingTwoNumbers(int x, int y) {
+    private int combineNumbers(int x, int y) {
         return x * 10 + y;
     }
 
     private DivisionStep buildingStep(int remainder, int divisor) {
-        DivisionStep step = new DivisionStep(remainder, divisor);
-        step.remainder = remainder % divisor;
-        step.product = step.dividend - step.remainder;
+        DivisionStep step = new DivisionStep(remainder);
+        step.setRemainder(remainder % divisor);
+        step.setDivisorMultiple(step.getDividend()-step.getRemainder());
         return step;
     }
 

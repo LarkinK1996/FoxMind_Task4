@@ -1,24 +1,32 @@
 package com.foxminded.division.model;
 
 public class DivisionStep {
-    public int dividend;
-    public int divisor;
-    public int remainder;
-    public int product;
+    private int dividend;
+    private int remainder;
+    private int divisorMultiple;
 
-    public DivisionStep(int dividend, int divisor) {
+    public DivisionStep(int dividend) {
         this.dividend = dividend;
-        this.divisor = divisor;
     }
 
-    @Override
-    public String toString() {
-        return "Step{" +
-            "dividend=" + dividend +
-            ", divisor=" + divisor +
-            ", remainder=" + remainder +
-            ", product=" + product +
-            '}';
+    public int getDividend() {
+        return dividend;
+    }
+
+    public int getRemainder() {
+        return remainder;
+    }
+
+    public int getDivisorMultiple() {
+        return divisorMultiple;
+    }
+
+    public void setRemainder(int remainder) {
+        this.remainder = remainder;
+    }
+
+    public void setDivisorMultiple(int divisorMultiple) {
+        this.divisorMultiple = divisorMultiple;
     }
 }
 
