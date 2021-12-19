@@ -10,24 +10,24 @@ class IntegerDivisionFormatterTest {
 
     IntegerDivisionCalculator calculator = new IntegerDivisionCalculator();
     IntegerDivisionFormatter formatter = new IntegerDivisionFormatter();
+    private static final String NEWLINE = "\n";
+
 
     @Test
-    void formatDivisionResult_shouldFindSubstrings_whenInputCorrectValues() {
+    void formatDivisionResult_shouldFormatDivisionResult_whenDividendMoreThanDivisor() {
         DivisionResult result = calculator.calculateDivisionResult(1234, 100);
         String formattedResult = formatter.formatDivisionResult(result);
 
-        boolean substringAvailability1 = formattedResult.contains("_1234|100");
-        assertTrue(substringAvailability1);
-        boolean substringAvailability2 = formattedResult.contains(" 100 |---");
-        assertTrue(substringAvailability2);
-        boolean substringAvailability3 = formattedResult.contains(" --- |12");
-        assertTrue(substringAvailability3);
-        boolean substringAvailability4 = formattedResult.contains(" _234");
-        assertTrue(substringAvailability4);
-        boolean substringAvailability5 = formattedResult.contains("  200");
-        assertTrue(substringAvailability5);
-        boolean substringAvailability6 = formattedResult.contains("   34");
-        assertTrue(substringAvailability6);
+
+        String expected = "_1234|100" + NEWLINE +
+            " 100 |---" + NEWLINE +
+            " --- |12" + NEWLINE +
+            " _234" + NEWLINE +
+            "  200" + NEWLINE +
+            "  ---" + NEWLINE +
+            "   34";
+
+        assertEquals(expected, formattedResult);
     }
 
     @Test

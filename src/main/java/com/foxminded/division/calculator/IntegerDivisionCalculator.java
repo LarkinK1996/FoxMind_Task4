@@ -20,8 +20,8 @@ public class IntegerDivisionCalculator {
             }
         }
         int quotient = dividend / divisor;
-        remainder = dividend % divisor;
-        return new DivisionResult(dividend, divisor, quotient, divisionSteps, remainder);
+        return new DivisionResult(dividend, divisor, quotient, divisionSteps);
+
     }
 
     private int[] convertNumberToDigits(int convertible) {
@@ -32,12 +32,11 @@ public class IntegerDivisionCalculator {
         return x * 10 + y;
     }
 
-    private DivisionStep buildingStep(int remainder, int divisor) {
-        DivisionStep step = new DivisionStep(remainder);
-        step.setRemainder(remainder % divisor);
-        step.setDivisorMultiple(step.getDividend() - step.getRemainder());
+    private DivisionStep buildingStep(int dividend, int divisor) {
+        int stepRemainder = dividend % divisor;
+        int stepDivisorMultiple = dividend - stepRemainder;
+        DivisionStep step = new DivisionStep(dividend, stepRemainder, stepDivisorMultiple);
         return step;
     }
-
 }
 

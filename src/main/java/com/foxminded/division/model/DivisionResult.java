@@ -1,20 +1,19 @@
 package com.foxminded.division.model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DivisionResult {
     private final int dividend;
     private final int divisor;
     private final int quotient;
-    private final int remainder;
     private final ArrayList<DivisionStep> divisionSteps;
 
-    public DivisionResult(int dividend, int divisor, int quotient, ArrayList<DivisionStep> divisionSteps,int remainder) {
+    public DivisionResult(int dividend, int divisor, int quotient, ArrayList<DivisionStep> divisionSteps) {
         this.dividend = dividend;
         this.divisor = divisor;
         this.quotient = quotient;
         this.divisionSteps = divisionSteps;
-        this.remainder = remainder;
     }
 
     public int getDividend() {
@@ -29,13 +28,32 @@ public class DivisionResult {
         return quotient;
     }
 
-    public int getRemainder() {
-        return remainder;
-    }
 
     public ArrayList<DivisionStep> getSteps() {
         return divisionSteps;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DivisionResult result = (DivisionResult) o;
+        return dividend == result.dividend && divisor == result.divisor && quotient == result.quotient && Objects.equals(divisionSteps, result.divisionSteps);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dividend, divisor, quotient, divisionSteps);
+    }
+
+    @Override
+    public String toString() {
+        return "DivisionResult{" +
+            "dividend=" + dividend +
+            ", divisor=" + divisor +
+            ", quotient=" + quotient +
+            ", divisionSteps=" + divisionSteps +
+            '}';
+    }
 }
 
