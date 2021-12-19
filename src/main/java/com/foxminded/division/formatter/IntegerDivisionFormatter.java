@@ -11,10 +11,14 @@ public class IntegerDivisionFormatter {
     private static final String VERTICALLINE = "|";
 
     public String formatDivisionResult(DivisionResult divisionResult) {
+        if (divisionResult.getDividend() < divisionResult.getDivisor()) {
+         return createDivisionStepWhenDividendLessThenDivisor(divisionResult.getDividend(), divisionResult.getDivisor());
+        }
         if (divisionResult.getDividend() != 0) {
             return createDivisionHeader(divisionResult) + createDivisionBody(divisionResult);
         } else
             return "_0|" + divisionResult.getDivisor() + NEWLINE + " 0|" + DASH.repeat(calculateNumberLength(divisionResult.getDivisor())) + NEWLINE + " -|0";
+
     }
 
     private String createDivisionHeader(DivisionResult divisionResult) {
@@ -22,6 +26,7 @@ public class IntegerDivisionFormatter {
         int spaceAmountToEndLine = calculateNumberLength(divisionResult.getDividend()) - calculateNumberLength(firstStepDivisorMultiple);
         int dashAmountBelowDivisorMultiple = calculateNumberLength(firstStepDivisorMultiple);
         int dashAmountInAnswer = Math.max(calculateNumberLength(divisionResult.getQuotient()), calculateNumberLength(divisionResult.getDivisor()));
+
 
         return MINUS + divisionResult.getDividend()
             + VERTICALLINE
@@ -64,6 +69,19 @@ public class IntegerDivisionFormatter {
             + NEWLINE
             + SPACE.repeat(indent)
             + DASH.repeat(dividendLength);
+    }
+
+    private String createDivisionStepWhenDividendLessThenDivisor(int dividend, int divisor) {
+        int indentAmountBeforeZero = calculateNumberLength(dividend);
+        int dashAmountBelowDivisor = calculateNumberLength(divisor);
+
+        return MINUS + dividend + VERTICALLINE + divisor
+            + NEWLINE + SPACE.repeat(indentAmountBeforeZero)
+            + 0 + VERTICALLINE
+            + DASH.repeat(dashAmountBelowDivisor) + NEWLINE
+            + SPACE.repeat(indentAmountBeforeZero)
+            + DASH + VERTICALLINE + 0
+            + NEWLINE + SPACE + dividend;
     }
 
     private int calculateNumberLength(int number) {
