@@ -51,7 +51,7 @@ public class DivisionResult {
         return "DivisionResult{" +
             "dividend=" + dividend +
             ", divisor=" + divisor +
-            ", quotient=" + quotient +
+            ", quotient=" + quotient + '\n' +
             ", divisionSteps=" + divisionSteps +
             '}';
     }

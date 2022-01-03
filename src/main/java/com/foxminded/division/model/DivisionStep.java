@@ -44,7 +44,7 @@ public class DivisionStep {
             "dividend=" + dividend +
             ", remainder=" + remainder +
             ", divisorMultiple=" + divisorMultiple +
-            '}';
+            '}' + '\n';
     }
 }
 

@@ -8,11 +8,16 @@ import java.util.ArrayList;
 public class IntegerDivisionCalculator {
 
     public DivisionResult calculateDivisionResult(int dividend, int divisor) {
+        if (dividend < 0) {
+            dividend = Math.abs(dividend);
+        }
+
         int[] dividendDigits = convertNumberToDigits(dividend);
         ArrayList<DivisionStep> divisionSteps = new ArrayList<>();
         int remainder = 0;
-
+        int counter = 0;
         for (int localDividend : dividendDigits) {
+            counter++;
             remainder = combineNumbers(remainder, localDividend);
             if (remainder >= divisor) {
                 divisionSteps.add(buildingStep(remainder, divisor));
